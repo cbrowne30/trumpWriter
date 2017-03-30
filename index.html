@@ -2,10 +2,64 @@
 <b>Which Tweet is a real Donald Trump Tweet?</b>
 <br>
 <p id ="Tweet1"></p><br>
+<button onclick="Tweet1Clicked">FAKE</button>
 <p id="Tweet2"></p>
-
+<button onclick="Tweet2Clicked">FAKE</button>
+  <p id="Results"></p>
 <script>
-
+  var window = 4;
+  var Trump = "
+  var TrumpLength = Trump.length;
+  var index = [];
+  var rand = Math.floor(Math.random() * NUMBER);
+  var rand2 = Math.floor(Math.random() * NUMBER);
+  var rand3 = Math.floor(Math.random() * 2) + 1;
+  for(i = 0; i < TrumpLength; i++){
+    if(Trump[i] === "*"){
+      index.push(i)
+    }
+  }
+  var RealTweet = Trump.substring(index[rand] + 1, index[rand + 1]);
+  var FakeTweet = "";
+  var current = Trump.substring(index[rand2] + 1, index[rand2] + 1 + window);
+  for(a = 0; a < 140; a++){
+    var list = [];
+    for(b = 0; b < TrumpLength; b++){
+      if(current === Trump.substring(b, b + window)) {
+        list.push(b);
+      }
+    }
+    var rand4 = Math.floor(Math.random() * list.length);
+    FakeTweet += Trump.charAt(list[rand4] + 1);
+    current = current.substring(1) + Trump.charAt(list[rand4] + 1);
+  }
+  
+  
+  if (rand3 == 1){
+    document.getElementById("Tweet1").innerHTML = FakeTweet;
+    document.getElementById("Tweet2").innerHTML = RealTweet;
+  }
+  else {
+    document.getElementById("Tweet1").innerHTML = RealTweet;
+    document.getElementById("Tweet2").innerHTML = FakeTweet;
+  }
+  
+  function Tweet1Clicked() {
+    if(rand3 == 1){
+      document.getElementById("Results").innerHTML = "CONGRATULATIONS that Tweet is fake";
+    } else {
+      document.getElementById("Results").innerHTML = "I'm sorry that Tweet is not fake"
+    }
+  }
+  
+    function Tweet2Clicked() {
+    if(rand3 == 2){
+      document.getElementById("Results").innerHTML = "CONGRATULATIONS that Tweet is fake";
+    } else {
+      document.getElementById("Results").innerHTML = "I'm sorry that Tweet is not fake"
+    }
+  }
+  
 </script>
 
 </html>
